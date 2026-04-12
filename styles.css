@@ -11,13 +11,14 @@ html, body {
 /* 2. THE WORLD (The Desk) */
 .wayshrine-container {
     background-image: url('./ProjectKore.png') !important;
-    background-size: cover;
-    background-position: center;
+    background-size: cover; /* This is the magic line for mobile */
+    background-position: center center;
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
-    display: block;
-    z-index: 1; /* Lowest layer */
+    position: fixed; /* Keeps it from scrolling away */
+    top: 0;
+    left: 0;
 }
 
 /* 3. THE SOMATIC FILTER (The Amber Lens) */
