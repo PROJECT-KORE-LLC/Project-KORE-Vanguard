@@ -32,7 +32,7 @@ body, html {
 }
 
 .wayshrine-container {
-    background-image: url('assets/ProjectKore.png');
+    background-image: url('ProjectKore.png');
     background-size: cover;
     background-position: center;
     width: 100vw;
