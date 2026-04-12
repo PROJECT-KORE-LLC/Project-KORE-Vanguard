@@ -1,34 +1,55 @@
-// 1. The "Observer" Logic: Runs once when the page loads
+let heartbeatInterval;
+
+// 1. The "Observer" Logic
 window.onload = function() {
-    console.log("Companion is observing... initiating soft amber glow in 3 seconds.");
+    console.log("Companion is observing... initiating sanctuary in 3 seconds.");
     
-    // Simulating the biometric trigger delay
     setTimeout(() => {
         const layer = document.getElementById('somatic-layer');
         if (layer) {
             layer.classList.add('active');
-            console.log("Somatic Hijack: Engaged (Auto-Start)");
+            startHeartbeat(); // Start the vibration
+            console.log("Somatic Hijack: Engaged. Heartbeat Active.");
         }
     }, 3000); 
 };
 
-// 2. The "Agency" Logic: Allows the user to kill the effect instantly
+// 2. The Vagal Heartbeat (60 BPM)
+function startHeartbeat() {
+    // Only trigger if the device supports vibration
+    if ("vibrate" in navigator) {
+        // Pulse for 200ms, pause for 800ms
+        heartbeatInterval = setInterval(() => {
+            navigator.vibrate(200); 
+        }, 1000);
+    }
+}
+
+// 3. The "Agency" Logic
 function dismissHijack(event) {
-    // This stops the click from hitting the background
     if (event) event.stopPropagation(); 
     
     const layer = document.getElementById('somatic-layer');
     if (layer) {
         layer.classList.remove('active');
-        console.log("User exercised Agency: Hijack Disengaged.");
+        
+        // Stop the heartbeat immediately
+        clearInterval(heartbeatInterval);
+        if ("vibrate" in navigator) navigator.vibrate(0);
+        
+        console.log("Agency exercised. Heartbeat silenced.");
     }
 }
 
-// 3. The "Manual Toggle" Logic: Just in case you want to click the desk to re-arm it
+// 4. Manual Toggle
 function triggerSomaticHijack() {
     const layer = document.getElementById('somatic-layer');
     if (layer) {
-        layer.classList.toggle('active');
-        console.log("Manual Toggle: Success");
+        if (layer.classList.contains('active')) {
+            dismissHijack();
+        } else {
+            layer.classList.add('active');
+            startHeartbeat();
+        }
     }
 }
