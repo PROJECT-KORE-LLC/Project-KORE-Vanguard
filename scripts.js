@@ -1,3 +1,13 @@
+// Wait for the entire page to load, then wire up the button
+document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', initializeEngine);
+        console.log("Button securely wired to the Engine.");
+    } else {
+        console.log("ERROR: Could not find the ENTER SANCTUARY button.");
+    }
+});
 let heartbeatInterval;
 let recognition; 
 let isSanctuaryActive = false;
