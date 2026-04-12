@@ -1,1 +1,24 @@
+/* The Somatic Hijack Overlay */
+.somatic-filter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Allows user to click things underneath */
+    z-index: 9999;
+    
+    /* The 2300K Amber "Safety" Tone */
+    background-color: rgba(255, 126, 0, 0.15); 
+    
+    /* Soften the blow to the eyes */
+    backdrop-filter: sepia(0.6) contrast(0.9) brightness(0.8);
+    
+    /* Smooth transition for when the Hijack is triggered */
+    transition: opacity 2s ease-in-out;
+    opacity: 0; 
+}
 
+.somatic-filter.active {
+    opacity: 1;
+}
