@@ -1,42 +1,33 @@
 let heartbeatInterval;
 
 window.onload = function() {
-    console.log("Observer active. Tap screen to authorize haptics and start the rhythm.");
+    console.log("Observer active. Tap screen to authorize haptics.");
 };
 
 function engageSanctuary() {
     const layer = document.getElementById('somatic-layer');
-    const world = document.querySelector('.wayshrine-container');
-    
     if (layer && !layer.classList.contains('active')) {
-        layer.classList.add('active');
-        if (world) world.classList.add('breathing'); // Start the visual breath
+        layer.classList.add('active'); // CSS handles the glow animation automatically now
         startHeartbeat();
-    }
-}
-
-function startHeartbeat() {
-    if ("vibrate" in navigator) {
-        clearInterval(heartbeatInterval);
-        // Initial handshake
-        navigator.vibrate(100);
-        
-        // Match the 4-second breath cycle (2 pulses per breath)
-        heartbeatInterval = setInterval(() => {
-            navigator.vibrate(150); 
-        }, 1000);
     }
 }
 
 function dismissHijack(event) {
     if (event) event.stopPropagation(); 
     const layer = document.getElementById('somatic-layer');
-    const world = document.querySelector('.wayshrine-container');
-    
     if (layer) {
         layer.classList.remove('active');
-        if (world) world.classList.remove('breathing'); // Stop the visual breath
         stopHeartbeat();
+    }
+}
+
+function startHeartbeat() {
+    if ("vibrate" in navigator) {
+        clearInterval(heartbeatInterval);
+        navigator.vibrate(100);
+        heartbeatInterval = setInterval(() => {
+            navigator.vibrate(150); 
+        }, 1000);
     }
 }
 
