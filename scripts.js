@@ -1,12 +1,22 @@
 let heartbeatInterval;
 
+// FORCE VIBRATION TEST: Tap anywhere to see if the motor even wakes up
+document.addEventListener('click', function() {
+    if ("vibrate" in navigator) {
+        // A short "I'm alive" buzz
+        navigator.vibrate(100);
+        console.log("Hardware: Vibration Handshake Sent");
+    }
+});
+
 window.onload = function() {
-    console.log("Observer active. Tap screen to authorize haptics.");
+    // We removed the auto-start for this test to focus on the TAP
+    console.log("Ready. Tap the desk to engage sanctuary.");
 };
 
 function engageSanctuary() {
     const layer = document.getElementById('somatic-layer');
-    if (layer && !layer.classList.contains('active')) {
+    if (layer) {
         layer.classList.add('active');
         startHeartbeat();
     }
@@ -14,18 +24,11 @@ function engageSanctuary() {
 
 function startHeartbeat() {
     if ("vibrate" in navigator) {
-        console.log("Haptics: Triggering 60BPM pulse.");
         clearInterval(heartbeatInterval);
-        
-        // Initial "Handshake" pulse
-        navigator.vibrate(300); 
-        
-        // Set the loop
+        // Standard 60BPM pulse
         heartbeatInterval = setInterval(() => {
-            navigator.vibrate(200); 
+            navigator.vibrate(150); 
         }, 1000);
-    } else {
-        console.log("Haptics: Not supported by this browser.");
     }
 }
 
@@ -43,16 +46,6 @@ function stopHeartbeat() {
     if ("vibrate" in navigator) navigator.vibrate(0);
 }
 
-// THE TRIGGER: This now forces the vibration to start on your tap
 function triggerSomaticHijack() {
-    const layer = document.getElementById('somatic-layer');
-    
-    // On the first tap, we 'wake up' the vibration
-    if ("vibrate" in navigator) navigator.vibrate(50); 
-    
-    if (layer) {
-        if (!layer.classList.contains('active')) {
-            engageSanctuary();
-        }
-    }
+    engageSanctuary();
 }
