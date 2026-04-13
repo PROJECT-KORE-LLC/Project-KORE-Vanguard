@@ -1,104 +1,58 @@
-/* 1. THE FOUNDATION */
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* No scrolling allowed in the Wayshrine */
-    background-color: #000; /* The Void */
-}
-
-/* 2. THE WORLD (The Desk) */
+/* --- THE FOUNDATION: PAX & THE WAYSHRINE --- */
 .wayshrine-container {
-    background-image: url('./ProjectKore.png') !important;
-    background-size: cover; /* This is the magic line for mobile */
-    background-position: center center;
-    background-repeat: no-repeat;
+    position: fixed; 
+    top: 0; 
+    left: 0;
     width: 100vw;
     height: 100vh;
-    position: fixed; /* Keeps it from scrolling away */
-    top: 0;
-    left: 0;
+    background-image: url('pax.png'); /* Your masterpiece */
+    background-size: cover; /* Fills the screen, no black bars */
+    background-position: center center; /* Locks her in the middle for mobile */
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 1; /* Sits at the back */
 }
 
-/* 3. THE SOMATIC FILTER (The Amber Lens) */
+/* --- THE HIJACK: AMBER BREATHING OVERLAY --- */
 .somatic-filter {
     position: fixed;
-    top: 0;
+    top: 0; 
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* Let clicks pass through to the room by default */
-    z-index: 9998; /* Just below the Dismiss button */
-    
-    /* The 2300K Amber tone */
-    background-color: rgba(255, 126, 0, 0.4); 
-    backdrop-filter: sepia(0.6) contrast(0.9) brightness(0.8);
-    
-    /* Start invisible */
-    opacity: 0; 
-    transition: opacity 2s ease-in-out;
+    /* Deep 2300K Amber, starting completely invisible */
+    background-color: rgba(229, 149, 0, 0); 
+    z-index: 10; /* Sits ON TOP of PAX */
+    pointer-events: none; /* Lets you click through to the desk */
+    transition: background-color 1.5s ease-in-out;
 }
 
-/* 4. THE ON SWITCH */
 .somatic-filter.active {
-    opacity: 1;
+    /* The room instantly dims and washes in heavy amber */
+    background-color: rgba(200, 100, 0, 0.7); 
+    pointer-events: auto; /* Traps your clicks while active */
+    animation: somaticBreathe 4s infinite alternate ease-in-out;
 }
 
-/* 5. THE SAFETY VALVE (The Dismiss Button) */
+/* The 4-Second Nervous System Down-Regulation Loop */
+@keyframes somaticBreathe {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* The Dismiss Button (Top Right) */
 .exit-trigger {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    background: rgba(0, 0, 0, 0.8); /* Dark for maximum readability */
-    color: #fff;
-    font-family: sans-serif;
-    font-weight: bold;
-    border-radius: 50px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
     cursor: pointer;
-    
-    /* CRITICAL: Allow the user to touch this even when the filter is active */
-    pointer-events: auto; 
-    z-index: 9999; /* The absolute top of the stack */
-    
-    /* Hidden by default, appears when somatic-filter is active */
-    display: none; 
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
 }
 
-/* Show the X only when the amber filter is active */
-.somatic-filter.active .exit-trigger {
-    display: block;
+.exit-trigger:hover {
+    color: rgba(255, 255, 255, 1);
 }
-/* The Breathing Animation - Now targeting the Light itself */
-@keyframes somatic-glow {
-    0% { opacity: 0.4; filter: brightness(1); }
-    50% { opacity: 0.7; filter: brightness(1.3); } /* The "Inhale" - Brighter/Deeper */
-    100% { opacity: 0.4; filter: brightness(1); } /* The "Exhale" */
-}
-
-/* Apply this to the Amber Filter when it's active */
-.somatic-filter.active {
-    opacity: 1; /* Base opacity */
-    animation: somatic-glow 4s ease-in-out infinite; /* The heartbeat of the light */
-    pointer-events: none;
-}
-/* --- THE THRESHOLD SCREEN --- */
-.intro-layer {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    /* A deep, cinematic void gradient instead of flat black */
-    background: radial-gradient(circle at center, #1a1a24 0%, #050508 100%);
-    z-index: 9999; display: flex; justify-content: center; align-items: center;
-    transition: opacity 1.5s ease-in-out, visibility 1.5s;
-}
-
-.intro-layer.active { opacity: 1; visibility: visible; }
-.intro-content { text-align: center; color: #e5b376; font-family: 'Georgia', serif; }
-.kore-title { font-size: 3rem; letter-spacing: 0.5rem; text-shadow: 0 0 20px rgba(229, 179, 118, 0.4); margin-bottom: 0.2rem; }
-.kore-subtitle { font-size: 1rem; letter-spacing: 0.3rem; margin-bottom: 3rem; opacity: 0.6; }
-.init-btn { 
-    padding: 15px 40px; font-size: 1.2rem; background: rgba(0,0,0,0.5); 
-    color: #e5b376; border: 1px solid #e5b376; border-radius: 3px; 
-    cursor: pointer; transition: all 0.4s ease; letter-spacing: 2px;
-}
-.init-btn:hover { background: rgba(229, 179, 118, 0.15); box-shadow: 0 0 20px rgba(229, 179, 118, 0.3); }
