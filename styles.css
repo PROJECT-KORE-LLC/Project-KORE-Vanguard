@@ -1,37 +1,24 @@
 /* --- GENERAL RESET --- */
 body, html { margin: 0; padding: 0; background-color: #050508; overflow: hidden; font-family: 'Georgia', serif; }
 
-/* --- CINEMATIC THRESHOLD --- */
-.intro-layer {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background-color: rgba(5, 5, 8, 0.3); 
-    backdrop-filter: blur(25px) grayscale(60%) brightness(0.6);
-    -webkit-backdrop-filter: blur(25px) grayscale(60%) brightness(0.6);
-    z-index: 9999; display: flex; justify-content: center; align-items: center;
-    transition: opacity 1.5s ease-in-out, backdrop-filter 1.5s ease-in-out, visibility 1.5s;
-}
-.intro-layer.active { opacity: 1; visibility: visible; }
-.intro-content { text-align: center; color: #e5b376; transition: opacity 0.5s ease-in-out; }
-.kore-title { font-size: 3.5rem; letter-spacing: 0.8rem; text-shadow: 0 0 30px rgba(229, 179, 118, 0.6); margin-bottom: 0.2rem; }
-.kore-subtitle { font-size: 1.2rem; letter-spacing: 0.4rem; margin-bottom: 4rem; opacity: 0.8; }
-.init-btn { 
-    padding: 15px 40px; font-size: 1.2rem; background: transparent; 
-    color: #e5b376; border: 1px solid rgba(229, 179, 118, 0.5); border-radius: 4px; 
-    cursor: pointer; transition: all 0.4s ease; letter-spacing: 3px;
-    animation: buttonBreathe 3s infinite alternate ease-in-out; 
-}
-.init-btn:hover { background: rgba(229, 179, 118, 0.15); border: 1px solid rgba(229, 179, 118, 1); box-shadow: 0 0 25px rgba(229, 179, 118, 0.5); animation: none; }
-@keyframes buttonBreathe { 0% { box-shadow: 0 0 10px rgba(229, 179, 118, 0.1); } 100% { box-shadow: 0 0 30px rgba(229, 179, 118, 0.4); } }
-
-/* --- THE HEARTH & BREATHING --- */
+/* --- THE HEARTH & BREATHING (Watermark Override) --- */
 .hearth-container {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
     background-image: url('pax.png'); 
-    background-size: cover; background-position: center center; background-repeat: no-repeat;
-    cursor: pointer; z-index: 1;
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+    cursor: pointer; 
+    z-index: 1;
+    /* Scales past the edge to hide AI watermarks */
+    transform: scale(1.05); 
 }
 .hearth-container.breathing { animation: imageBreathe 4s infinite alternate ease-in-out; }
-@keyframes imageBreathe { 0% { transform: scale(1); } 100% { transform: scale(1.025); } }
+@keyframes imageBreathe { 0% { transform: scale(1.05); } 100% { transform: scale(1.075); } }
 
 /* --- LORE SHARD & BANNER --- */
 .glowing-shard {
@@ -40,7 +27,6 @@ body, html { margin: 0; padding: 0; background-color: #050508; overflow: hidden;
     box-shadow: 0 0 15px #e5b376, 0 0 30px #e5b376; cursor: pointer; z-index: 20; 
     animation: floatShard 4s infinite ease-in-out; transition: all 0.5s ease;
 }
-/* The massive invisible hitbox to prevent accidental panic triggers */
 .glowing-shard::before { content: ''; position: absolute; top: -25px; left: -25px; right: -25px; bottom: -25px; background: transparent; }
 .glowing-shard:hover { transform: rotate(45deg) scale(1.5); box-shadow: 0 0 25px #fff, 0 0 50px #e5b376; }
 @keyframes floatShard { 0%, 100% { transform: translateY(0) rotate(45deg); opacity: 0.7; } 50% { transform: translateY(-20px) rotate(45deg); opacity: 1; } }
@@ -75,7 +61,7 @@ body, html { margin: 0; padding: 0; background-color: #050508; overflow: hidden;
 .hud-line span.alert { color: rgba(255, 77, 77, 0.8); text-shadow: 0 0 5px rgba(255, 77, 77, 0.3); }
 .hud-line span.calm { color: rgba(77, 255, 136, 0.8); text-shadow: 0 0 5px rgba(77, 255, 136, 0.3); }
 
-/* --- SESSION SUMMARY (The Hook) --- */
+/* --- SESSION SUMMARY --- */
 .summary-layer {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: rgba(5, 5, 8, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -83,10 +69,7 @@ body, html { margin: 0; padding: 0; background-color: #050508; overflow: hidden;
     opacity: 0; visibility: hidden; transition: all 1s ease;
 }
 .summary-layer.active { opacity: 1; visibility: visible; }
-.summary-content {
-    background: rgba(20, 20, 25, 0.7); border: 1px solid rgba(229, 179, 118, 0.3);
-    padding: 40px; border-radius: 8px; text-align: center; max-width: 400px; width: 80%; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-}
+.summary-content { background: rgba(20, 20, 25, 0.7); border: 1px solid rgba(229, 179, 118, 0.3); padding: 40px; border-radius: 8px; text-align: center; max-width: 400px; width: 80%; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 .summary-title { color: #e5b376; letter-spacing: 4px; font-size: 1.5rem; border-bottom: 1px solid rgba(229, 179, 118, 0.2); padding-bottom: 15px; margin-bottom: 20px; }
 .summary-stats p { color: #aaa; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; margin: 10px 0; letter-spacing: 1px; }
 .highlight-green { color: #4dff88; text-shadow: 0 0 8px rgba(77, 255, 136, 0.4); }
@@ -94,69 +77,39 @@ body, html { margin: 0; padding: 0; background-color: #050508; overflow: hidden;
 .the-hook { background: rgba(0, 0, 0, 0.3); padding: 15px; margin: 25px 0; border-radius: 4px; border-left: 3px solid #ff4d4d; }
 .the-hook p { font-size: 0.85rem; color: #ccc; line-height: 1.5; margin: 5px 0; }
 .the-hook strong { color: #ff4d4d; }
-/* --- KORE PORTAL OVERLAYS --- */
+
+/* --- KORE PORTAL OVERLAYS (LUXURY GLASSMORPHISM) --- */
 .fullscreen-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #050505; /* Deep, almost black */
-    z-index: 9999; /* Keeps it on top of everything */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(5, 5, 8, 0.4); backdrop-filter: blur(25px) brightness(0.6); -webkit-backdrop-filter: blur(25px) brightness(0.6);
+    z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 1.5s ease-in-out, backdrop-filter 1.5s ease-in-out;
 }
+.hidden { opacity: 0; pointer-events: none; }
+.brand-container { text-align: center; display: flex; flex-direction: column; align-items: center; }
 
-.hidden {
-    opacity: 0;
-    pointer-events: none; /* Stops it from being clickable when hidden */
-}
-
-.brand-container {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* THE DIAMOND ASSASSIN */
 .kore-seal {
-    width: 180px; /* Adjust size as needed */
-    margin-bottom: 20px;
+    width: 180px; margin-bottom: 20px;
+    clip-path: circle(45% at 50% 50%); 
+    filter: drop-shadow(0px 0px 15px rgba(229, 179, 118, 0.3)); 
 }
+.kore-title { font-family: 'Times New Roman', serif; color: #E8DCC4; font-size: 3rem; letter-spacing: 8px; margin: 0; text-shadow: 0 0 25px rgba(229, 179, 118, 0.6); }
+.kore-tagline { font-family: Arial, sans-serif; color: #D4AF37; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 40px; opacity: 0.9; text-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
 
-.kore-title {
-    font-family: 'Times New Roman', serif; /* Classic, grounded serif */
-    color: #E8DCC4; /* Alabaster white/gold */
-    font-size: 3rem;
-    letter-spacing: 8px;
-    margin: 0;
-}
-
-.kore-tagline {
-    font-family: Arial, sans-serif; /* Clean, technical contrast */
-    color: #D4AF37; /* Vintage gold */
-    font-size: 1rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-}
-
+/* LUXURY BUTTONS */
 .sanctuary-btn {
-    background: transparent;
-    border: 1px solid #D4AF37;
-    color: #D4AF37;
-    padding: 12px 30px;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background: rgba(20, 20, 20, 0.3); border: 1px solid rgba(212, 175, 55, 0.5); color: #D4AF37;
+    padding: 12px 30px; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 4px;
+    backdrop-filter: blur(5px); transition: all 0.4s ease; animation: buttonBreathe 3s infinite alternate ease-in-out;
 }
+.sanctuary-btn:hover { background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 1); color: #E8DCC4; box-shadow: 0px 0px 25px rgba(212, 175, 55, 0.6); animation: none; }
+@keyframes buttonBreathe { 0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.1); } 100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); } }
 
-.sanctuary-btn:hover {
-    background: #D4AF37;
-    color: #050505;
-    box-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4);
+/* THE LUXURY TOUR BUTTON */
+.tour-btn-glass {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999; 
+    background: rgba(20, 20, 20, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.3); padding: 10px 20px; border-radius: 6px; 
+    cursor: pointer; font-family: 'Courier New', Courier, monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: all 0.4s ease;
 }
+.tour-btn-glass:hover { background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 1); color: #E8DCC4; box-shadow: 0px 0px 20px rgba(212, 175, 55, 0.4); }
