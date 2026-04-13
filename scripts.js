@@ -38,21 +38,23 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = loadPremiumVoices;
 }
 
-// --- THE VOICE OF PAX ---
+// --- THE VOICE OF PAX (BULLETPROOF VERSION) ---
+window.paxUtterances = []; // Prevents the browser from deleting her voice mid-sentence
+
 function paxSpeak(text, callback) {
+    // 1. If she is already talking, instantly cut her off to prioritize your new command
     if (synth.speaking) {
-        console.error("PAX is already speaking.");
-        return;
+        synth.cancel();
     }
     
     const utterance = new SpeechSynthesisUtterance(text);
+    window.paxUtterances.push(utterance); // Locks the sentence into memory
     
-    // Attach the premium voice we hunted down
+    // Attach the premium voice
     if (paxVoice) {
         utterance.voice = paxVoice;
     }
     
-    // Smooth the delivery
     utterance.rate = 0.85; 
     utterance.pitch = 0.9; 
     
@@ -60,14 +62,20 @@ function paxSpeak(text, callback) {
     const audio = document.getElementById('sanctuary-audio');
     if (audio) audio.volume = 0.1; 
 
-    utterance.onend = function (event) {
+    // 2. When she finishes speaking, trigger the callback (which shuts down the protocol)
+    utterance.onend = function () {
         if (audio && isSanctuaryActive) audio.volume = 0.5;
         if (callback) callback();
-    }
+    };
+
+    // 3. Failsafe: If the browser's TTS engine glitches for any reason, shut down anyway
+    utterance.onerror = function() {
+        console.error("PAX voice error. Forcing callback.");
+        if (callback) callback();
+    };
 
     synth.speak(utterance);
 }
-
 function initializeEngine() {
     console.log("🚀 KORE Engine Initializing...");
 
