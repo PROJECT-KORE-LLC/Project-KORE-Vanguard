@@ -4,24 +4,59 @@ body, html {
     font-family: 'Georgia', serif; 
 }
 
-/* --- 2. THE THRESHOLD SCREEN (Homepage) --- */
+/* --- 2. THE CINEMATIC THRESHOLD SCREEN --- */
 .intro-layer {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: radial-gradient(circle at center, #1a1a24 0%, #050508 100%);
+    /* We remove the solid black background and replace it with a transparent dark tint */
+    background-color: rgba(5, 5, 8, 0.3); 
+    
+    /* THE AAA MAGIC: This blurs the PAX image underneath and drains the color */
+    backdrop-filter: blur(25px) grayscale(60%) brightness(0.6);
+    -webkit-backdrop-filter: blur(25px) grayscale(60%) brightness(0.6); /* For Apple devices */
+    
     z-index: 9999; display: flex; justify-content: center; align-items: center;
-    transition: opacity 1.5s ease-in-out, visibility 1.5s;
+    transition: opacity 1.5s ease-in-out, backdrop-filter 1.5s ease-in-out, visibility 1.5s;
 }
-.intro-layer.active { opacity: 1; visibility: visible; }
-.intro-content { text-align: center; color: #e5b376; }
-.kore-title { font-size: 3rem; letter-spacing: 0.5rem; text-shadow: 0 0 20px rgba(229, 179, 118, 0.4); margin-bottom: 0.2rem; }
-.kore-subtitle { font-size: 1rem; letter-spacing: 0.3rem; margin-bottom: 3rem; opacity: 0.6; }
-.init-btn { 
-    padding: 15px 40px; font-size: 1.2rem; background: rgba(0,0,0,0.5); 
-    color: #e5b376; border: 1px solid #e5b376; border-radius: 3px; 
-    cursor: pointer; transition: all 0.4s ease; letter-spacing: 2px;
-}
-.init-btn:hover { background: rgba(229, 179, 118, 0.15); box-shadow: 0 0 20px rgba(229, 179, 118, 0.3); }
 
+.intro-layer.active { 
+    opacity: 1; visibility: visible; 
+}
+
+.intro-content { 
+    text-align: center; color: #e5b376; 
+    transition: opacity 0.5s ease-in-out; /* Makes the text fade faster than the blur */
+}
+
+.kore-title { 
+    font-size: 3.5rem; letter-spacing: 0.8rem; 
+    text-shadow: 0 0 30px rgba(229, 179, 118, 0.6); 
+    margin-bottom: 0.2rem; 
+}
+
+.kore-subtitle { 
+    font-size: 1.2rem; letter-spacing: 0.4rem; margin-bottom: 4rem; opacity: 0.8; 
+}
+
+/* The Breathing Button */
+.init-btn { 
+    padding: 15px 40px; font-size: 1.2rem; background: transparent; 
+    color: #e5b376; border: 1px solid rgba(229, 179, 118, 0.5); border-radius: 4px; 
+    cursor: pointer; transition: all 0.4s ease; letter-spacing: 3px;
+    animation: buttonBreathe 3s infinite alternate ease-in-out; /* Adds a slow pulse */
+}
+
+.init-btn:hover { 
+    background: rgba(229, 179, 118, 0.15); 
+    border: 1px solid rgba(229, 179, 118, 1);
+    box-shadow: 0 0 25px rgba(229, 179, 118, 0.5); 
+    animation: none; /* Stops breathing when they hover so it feels solid */
+}
+
+/* The Button Pulse Keyframes */
+@keyframes buttonBreathe {
+    0% { box-shadow: 0 0 10px rgba(229, 179, 118, 0.1); }
+    100% { box-shadow: 0 0 30px rgba(229, 179, 118, 0.4); }
+}
 /* --- 3. THE FOUNDATION: PAX & THE WAYSHRINE --- */
 .wayshrine-container {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
