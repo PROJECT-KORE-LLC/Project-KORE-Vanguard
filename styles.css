@@ -66,6 +66,15 @@ body, html {
     background-repeat: no-repeat;
     cursor: pointer; z-index: 1;
 }
+/* Add this new animation class */
+.wayshrine-container.breathing {
+    animation: imageBreathe 4s infinite alternate ease-in-out;
+}
+
+@keyframes imageBreathe {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.025); /* Zooms in just 2.5% */ }
+}
 
 /* --- 4. THE HIJACK: LIGHTER AMBER BREATHING --- */
 .somatic-filter {
