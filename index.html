@@ -8,12 +8,15 @@
 </head>
 <body>
 
-    <div id="air-lock" class="fullscreen-overlay" onclick="unlockEngine()">
-        <h1 class="kore-title pulse-text">INITIATE ENGINE</h1>
+    <div id="intro-screen" class="fullscreen-overlay vault-bg">
+        <div class="brand-container">
+            <h1 class="kore-title">KORE</h1>
+            <button id="enter-btn" class="glass-btn">ENTER SANCTUARY</button>
+        </div>
     </div>
 
     <div id="somatic-layer" class="fullscreen-overlay hidden">
-        <div id="hearth-core" class="glowing-core"></div>
+        <div class="hearth-container"></div>
     </div>
 
     <audio id="sanctuary-audio" loop>
