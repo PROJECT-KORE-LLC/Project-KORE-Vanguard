@@ -8,40 +8,17 @@
 </head>
 <body>
 
-    <div id="intro-screen" class="fullscreen-overlay">
-        <div class="brand-container">
-            <h1 class="kore-title">KORE</h1>
-            <p class="kore-tagline">The Somatic Multiverse</p>
-            <button id="enter-btn" class="sanctuary-btn">Enter Sanctuary</button>
-        </div>
+    <div id="air-lock" class="fullscreen-overlay" onclick="unlockEngine()">
+        <h1 class="kore-title pulse-text">INITIATE ENGINE</h1>
     </div>
 
-    <div id="exit-screen" class="fullscreen-overlay hidden">
-        <div class="brand-container">
-            <h1 class="kore-title">KORE</h1>
-            <p class="kore-tagline" style="margin-top: 20px;">The Sovereignty Begins Now.</p>
-        </div>
-    </div>
-
-    <div class="hearth-container" onclick="triggerSomaticHijack()">
-
-    <div id="somatic-layer" class="somatic-filter">
-        <div class="exit-trigger" onclick="dismissHijack(event)">✕ Dismiss</div>
-        
-    </div>
-            <button class="sanctuary-btn" onclick="closeSummary()">RETURN TO THE HEARTH</button>
-        </div>
+    <div id="somatic-layer" class="fullscreen-overlay hidden">
+        <div id="hearth-core" class="glowing-core"></div>
     </div>
 
     <audio id="sanctuary-audio" loop>
         <source src="fire.mp3" type="audio/mpeg">
     </audio>
-
-    <script src="scripts.js"></script>
-</body>
-</html>        </div>
-
-    <audio id="sanctuary-audio" loop><source src="fire.mp3" type="audio/mpeg"></audio>
 
     <script src="scripts.js"></script>
 </body>
