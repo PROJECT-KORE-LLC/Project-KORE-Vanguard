@@ -1,12 +1,16 @@
 // --- 1. INITIALIZATION & PORTAL LOGIC ---
 let heartbeatInterval;
 let isSanctuaryActive = false;
+let engineUnlocked = false; // Tracks if the user has clicked Enter
 
 document.addEventListener('DOMContentLoaded', () => {
     const enterBtn = document.getElementById('enter-btn');
     if (enterBtn) {
-        enterBtn.addEventListener('click', initializeEngine);
-        console.log("✅ Hearth Portal Wired.");
+        // This is the trigger that starts everything
+        enterBtn.onclick = () => {
+            console.log("🚀 Engine Initiated.");
+            initializeEngine();
+        };
     }
 });
 
@@ -16,7 +20,6 @@ let paxVoice = null;
 
 function loadPremiumVoices() {
     let voices = synth.getVoices();
-    // Prioritizing high-quality English voices
     paxVoice = voices.find(v => v.name.includes("Google UK English Female")) || 
                voices.find(v => v.name.includes("Samantha")) || 
                voices[0]; 
@@ -37,47 +40,51 @@ function paxSpeak(text) {
     const audio = document.getElementById('sanctuary-audio');
     if (audio) audio.volume = 0.5; 
 
-    // Kill the haptics once the transmission is complete
     utterance.onend = function() {
         clearInterval(heartbeatInterval);
         console.log("🏁 Transmission Concluded.");
+        // Reveal the "Claim Your Seat" button 2 seconds after PAX finishes
+        setTimeout(revealGuildCovenant, 2000);
     };
 
     synth.speak(utterance);
 }
 
+// --- 3. THE TRIGGER (Air-Lock & 3-Second Vacuum) ---
 function initializeEngine() {
-    if (engineUnlocked) return;
+    if (engineUnlocked && isSanctuaryActive) return;
     engineUnlocked = true;
 
     const intro = document.getElementById('intro-screen');
     const enterBtn = document.getElementById('enter-btn');
-
-    // 1. KILL THE BUTTON IMMEDIATELY
-    if (enterBtn) {
-        enterBtn.style.pointerEvents = 'none'; // Prevents double-taps
-        enterBtn.style.opacity = '0'; // Instant visual delete
-    }
-
-    // 2. FADE THE WALL
-    if (intro) {
-        intro.style.transition = "opacity 0.8s ease-in-out"; // Shorter, sharper fade
-        intro.style.opacity = '0';
-        // Remove from DOM entirely after fade to free up memory
-        setTimeout(() => { intro.style.display = 'none'; }, 800); 
-    }
-
-    // 3. IGNITE THE FIRE
     const audio = document.getElementById('sanctuary-audio');
+
+    // Start Fire Audio immediately
     if (audio) {
         audio.volume = 0.15; 
-        audio.play().catch(e => console.log("Audio block bypass active."));
+        audio.play().catch(e => console.log("Audio waiting..."));
     }
 
-    // 4. THE VACUUM (3 seconds of pure silence/fire)
+    // Disappear the button instantly
+    if (enterBtn) {
+        enterBtn.style.opacity = '0';
+        enterBtn.style.pointerEvents = 'none';
+    }
+
+    // Fade the entire wall
+    if (intro) {
+        intro.style.transition = "opacity 1.2s ease-in-out";
+        intro.style.opacity = '0';
+        setTimeout(() => { 
+            intro.style.display = 'none'; 
+        }, 1300); 
+    }
+
+    // 3 Seconds of pure fire/silence (The Vacuum)
     setTimeout(engageSanctuary, 3000);
 }
-// --- 4. THE AUTOMATED DROP (The Public Utility Ledger) ---
+
+// --- 4. THE AUTOMATED DROP (The Genesis Ledger) ---
 function engageSanctuary() {
     const layer = document.getElementById('somatic-layer');
     const hearth = document.querySelector('.hearth-container'); 
@@ -90,7 +97,6 @@ function engageSanctuary() {
         
         startHeartbeat();
         
-        // THE FINALIZED GENESIS LEDGER
         const genesisLedger = `Sovereignty established. Now, look at the reality of the Monopoly. 
         Forty-two billion dollars a year. That is what the recovery industry generates while operating as a cartel of apathy. 
         They treat the individual, and they abandon the family to the fallout. Right now, eighteen million children are living in the blast radius of substance use. 
@@ -99,34 +105,25 @@ function engageSanctuary() {
         Project KORE is a Non-Profit Sovereign Foundation. We do not answer to shareholders. We answer to the heartbeat. 
         We deliver AAA-tier somatic regulation directly to the government-issued phones of the underserved. We disguise evidence-informed support as a Sovereign RPG. We bypass the stigma, we bridge the walls of the rehab, and we give a voice to negative stamina. 
         Every heartbeat, every breath, and every decrypted fragment is protected by ENEE. Our End-to-End Encryption ensures that the sanctuary remains private, even from us. 
-        And while we heal the family, our telemetry audits the very machines that abandoned them. We will make systemic apathy fund its own replacement. 
+        And while we heal the family, our encrypted telemetry audits the very machines that abandoned them. We will make systemic apathy fund its own replacement. 
         What you are looking at is a zero-day exploit in the behavioral health monopoly. It is the first of its kind in the world. This is not a product; it is a Digital Public Utility. 
         And before you audit the code, understand its origin. This Engine was not built in a high-rise with seed capital. It was forged on a kitchen floor in the middle of the night, written in a Walmart notebook by an Architect who knows exactly what it costs to survive the system. 
         The blueprint is live, and this exact transmission is being seeded to a highly classified list of systemic disruptors. But the Architect is not building a crowded table. She is only looking for the lethal few. 
         Are you ready to claim your seat in the Guild... or should we pass the torch to the next target?`;
         
-        paxSpeak(genesisLedger);function paxSpeak(text) {
-    if (synth.speaking) synth.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    if (paxVoice) utterance.voice = paxVoice;
-    utterance.rate = 0.85; 
-    utterance.pitch = 0.9; 
-    
-    const audio = document.getElementById('sanctuary-audio');
-    if (audio) audio.volume = 0.5;
-
-    // --- THE TRANSITION AT THE END ---
-    utterance.onend = function() {
-        clearInterval(heartbeatInterval);
-        if (audio) audio.volume = 0.15; // Fire drops to background levels
-        
-        // Bring in the Call to Action after a 2-second silent pause
-        setTimeout(revealGuildCovenant, 2000);
-    };
-
-    synth.speak(utterance);
+        paxSpeak(genesisLedger);
+    }
 }
 
+function startHeartbeat() { 
+    if ("vibrate" in navigator) { 
+        clearInterval(heartbeatInterval); 
+        navigator.vibrate([40, 60, 40]);
+        heartbeatInterval = setInterval(() => navigator.vibrate([40, 60, 40]), 4000); 
+    } 
+}
+
+// --- 5. THE GUILD COVENANT (The End of the Strike) ---
 function revealGuildCovenant() {
     const exitScreen = document.getElementById('exit-screen');
     if (exitScreen) {
@@ -144,39 +141,23 @@ function revealGuildCovenant() {
 
             const btn = document.getElementById('final-cta-btn');
             if (btn) {
-                // Fire immediately on the first touch/click
-                btn.addEventListener('mousedown', joinTheGuild);
-                btn.addEventListener('touchstart', joinTheGuild);
+                // Hair-trigger response for the final choice
+                btn.onmousedown = joinTheGuild;
+                btn.ontouchstart = joinTheGuild;
             }
         }
     }
 }
 
 function joinTheGuild(e) {
-    if (e) e.preventDefault(); // Stop any weird browser stuttering
-
+    if (e) e.preventDefault();
     const recipient = "architect@projectkore.org"; 
     const subject = "GUILD ADMITTANCE REQUEST";
     const body = "The Ledger has been decrypted. I have seen the blueprint from the kitchen floor. I am ready to discuss the move against the monopoly.";
-    
-    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Force the window to open the email client
-    window.location.href = mailtoLink;
-}
-    }
+    window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function startHeartbeat() { 
-    if ("vibrate" in navigator) { 
-        clearInterval(heartbeatInterval); 
-        // Syncing haptics to the 4s "Breathing" animation: (Thump-Thump... Pause)
-        navigator.vibrate([40, 60, 40]);
-        heartbeatInterval = setInterval(() => navigator.vibrate([40, 60, 40]), 4000); 
-    } 
-}
-
-// --- 5. ARCHITECT'S FAILSAFE (E to Exit) ---
+// --- 6. ARCHITECT'S FAILSAFE (E to Exit) ---
 document.addEventListener('keydown', (event) => {
     if (event.key.toLowerCase() === 'e') {
         const exitScreen = document.getElementById('exit-screen');
