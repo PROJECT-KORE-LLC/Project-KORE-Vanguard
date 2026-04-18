@@ -43,15 +43,11 @@ body, html {
 
 /* --- KORE PORTAL OVERLAYS --- */
 .fullscreen-overlay {
-    position: fixed; 
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background-color: rgba(5, 5, 8, 0.6); /* Slightly darker for better contrast */
-    backdrop-filter: blur(20px); /* Reduced from 25px to help the S9 breathe */
-    -webkit-backdrop-filter: blur(20px);
-    z-index: 9999; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(5, 5, 8, 0.7); /* Slightly darker to compensate for less blur */
+    backdrop-filter: blur(12px) brightness(0.6); 
+    -webkit-backdrop-filter: blur(12px) brightness(0.6);
+    z-index: 9999; display: flex; justify-content: center; align-items: center; 
     transition: opacity 2.5s ease-in-out;
 }
 .hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
