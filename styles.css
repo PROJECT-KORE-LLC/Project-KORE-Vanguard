@@ -1,48 +1,117 @@
-/* --- GENERAL RESET --- */
-body, html { margin: 0; padding: 0; background-color: #050508; overflow: hidden; font-family: 'Georgia', serif; }
+/* --- GENERAL RESET & S9 HARDWARE LOCK --- */
+body, html { 
+    margin: 0; 
+    padding: 0; 
+    background-color: #050508; 
+    overflow: hidden; 
+    font-family: 'Georgia', serif;
+    height: 100%;
+    width: 100%;
+    position: fixed; /* Prevents the "bounce" that triggers glitches */
+}
 
 /* --- THE HEARTH & BREATHING --- */
 .hearth-container {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background-image: url('pax.png'); background-size: cover; background-position: center center; background-repeat: no-repeat;
-    z-index: 1; transform: scale(1.05); 
-    will-change: transform; /* Hardware Lock */
+    position: fixed; 
+    top: -1%; /* Pulls edge off-screen to hide flicker */
+    left: -1%; 
+    width: 102vw; /* Overscan: 2% larger than viewport */
+    height: 102vh; 
+    background-image: url('pax.png'); 
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+    z-index: 1; 
+    transform: scale(1.05); 
+    will-change: transform; 
 }
 .hearth-container.breathing { animation: imageBreathe 4s infinite alternate ease-in-out; }
 @keyframes imageBreathe { 0% { transform: scale(1.05); } 100% { transform: scale(1.075); } }
 
 /* --- SOMATIC HIJACK --- */
 .somatic-filter {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    position: fixed; 
+    top: -1%; 
+    left: -1%; 
+    width: 102vw; 
+    height: 102vh;
     background-color: rgba(229, 149, 0, 0); 
-    z-index: 10; pointer-events: none; 
-    transition: background-color 2.5s ease-in-out; /* Matches the new fade speed */
+    z-index: 10; 
+    pointer-events: none; 
+    transition: background-color 2.5s ease-in-out;
     will-change: background-color, opacity;
 }
-.somatic-filter.active { background-color: rgba(229, 149, 0, 0.3); pointer-events: auto; animation: somaticBreathe 4s infinite alternate ease-in-out; }
+.somatic-filter.active { 
+    background-color: rgba(229, 149, 0, 0.3); 
+    pointer-events: auto; 
+    animation: somaticBreathe 4s infinite alternate ease-in-out; 
+}
 @keyframes somaticBreathe { 0% { opacity: 0.3; } 100% { opacity: 0.8; } }
 
-/* --- KORE PORTAL OVERLAYS --- */
+/* --- KORE PORTAL OVERLAYS (LUXURY TYPOGRAPHY) --- */
 .fullscreen-overlay {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
     background-color: rgba(5, 5, 8, 0.4); 
     backdrop-filter: blur(25px) brightness(0.6); 
     -webkit-backdrop-filter: blur(25px) brightness(0.6);
-    z-index: 9999; display: flex; justify-content: center; align-items: center; 
-    transition: opacity 2.5s ease-in-out, filter 2.5s ease-in-out; /* The Son's Pivot */
+    z-index: 9999; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    transition: opacity 2.5s ease-in-out, filter 2.5s ease-in-out;
     will-change: opacity, backdrop-filter;
 }
 .hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 .brand-container { text-align: center; display: flex; flex-direction: column; align-items: center; }
 
-.kore-title { font-family: 'Times New Roman', serif; color: #E8DCC4; font-size: 5rem; letter-spacing: 15px; margin: 0 0 10px 0; text-shadow: 0 0 35px rgba(229, 179, 118, 0.6); }
-.kore-tagline { font-family: Arial, sans-serif; color: #D4AF37; font-size: 1rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 50px; opacity: 0.9; text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+/* THE MASSIVE TITLE */
+.kore-title { 
+    font-family: 'Times New Roman', serif; 
+    color: #E8DCC4; 
+    font-size: 5rem; 
+    letter-spacing: 15px; 
+    margin: 0 0 10px 0; 
+    text-shadow: 0 0 35px rgba(229, 179, 118, 0.6); 
+}
+.kore-tagline { 
+    font-family: Arial, sans-serif; 
+    color: #D4AF37; 
+    font-size: 1rem; 
+    letter-spacing: 4px; 
+    text-transform: uppercase; 
+    margin-bottom: 50px; 
+    opacity: 0.9; 
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); 
+}
 
+/* LUXURY BUTTONS */
 .sanctuary-btn {
-    background: rgba(20, 20, 20, 0.3); border: 1px solid rgba(212, 175, 55, 0.5); color: #D4AF37;
-    padding: 15px 40px; font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; border-radius: 4px;
-    backdrop-filter: blur(5px); transition: all 0.4s ease; animation: buttonBreathe 3s infinite alternate ease-in-out;
+    background: rgba(20, 20, 20, 0.3); 
+    border: 1px solid rgba(212, 175, 55, 0.5); 
+    color: #D4AF37;
+    padding: 15px 40px; 
+    font-size: 1.1rem; 
+    letter-spacing: 3px; 
+    text-transform: uppercase; 
+    cursor: pointer; 
+    border-radius: 4px;
+    backdrop-filter: blur(5px); 
+    transition: all 0.4s ease; 
+    animation: buttonBreathe 3s infinite alternate ease-in-out;
     will-change: opacity, transform;
 }
-.sanctuary-btn:hover { background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 1); color: #E8DCC4; box-shadow: 0px 0px 25px rgba(212, 175, 55, 0.6); animation: none; }
-@keyframes buttonBreathe { 0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.1); } 100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); } }
+.sanctuary-btn:hover { 
+    background: rgba(212, 175, 55, 0.15); 
+    border: 1px solid rgba(212, 175, 55, 1); 
+    color: #E8DCC4; 
+    box-shadow: 0px 0px 25px rgba(212, 175, 55, 0.6); 
+    animation: none; 
+}
+@keyframes buttonBreathe { 
+    0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.1); } 
+    100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); } 
+}
