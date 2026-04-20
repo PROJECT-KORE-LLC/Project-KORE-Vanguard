@@ -7,47 +7,62 @@ html, body {
     font-family: 'Georgia', serif;
     height: 100%;
     width: 100%;
-    position: relative; /* Anchor for Absolute positioning */
+    position: relative; 
 }
 
 /* --- THE HEARTH (Layer 1) --- */
 .hearth-container {
     position: absolute; 
     top: 0; left: 0; right: 0; 
-    bottom: -5px; /* Keeps glitch buried */
+    bottom: -5px; 
     background-image: url('pax.png'); 
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat;
-    z-index: 1 !important; /* Forced to back */
+    z-index: 1 !important; 
     transform: scale(1.15); 
 }
-.hearth-container.breathing { animation: imageBreathe 4s infinite alternate ease-in-out; }
-@keyframes imageBreathe { 0% { transform: scale(1.15); } 100% { transform: scale(1.2); } }
+.hearth-container.breathing { 
+    animation: imageBreathe 4s infinite alternate ease-in-out; 
+}
+@keyframes imageBreathe { 
+    0% { transform: scale(1.15); } 
+    100% { transform: scale(1.2); } 
+}
 
-/* --- SOMATIC HIJACK (Layer 2 - THE GLOW) --- */
+/* --- SOMATIC HIJACK (Layer 2 - THE REPAIRED GLOW) --- */
 .somatic-filter {
     position: absolute; 
     top: 0; left: 0; 
     width: 100%; 
-    height: calc(100% + 5px); /* FIXED: Added missing 'height:' label */
+    height: calc(100% + 5px); 
     background-color: rgba(229, 149, 0, 0); 
-    z-index: 500 !important; /* Forced to middle, above the image */
+    z-index: 500 !important; 
     pointer-events: none; 
-    transition: background-color 2.5s ease-in-out;
     display: block !important;
+    /* S9 FIX: Removed transition: background-color 2.5s ease-in-out; 
+       Transitions on the same element as animations cause GPU stalling on S9. */
 }
 
 .somatic-filter.active { 
-    background-color: rgba(229, 149, 0, 0.35) !important; /* The 2300K Gold */
-    opacity: 1 !important;
+    background-color: rgba(229, 149, 0, 0.4) !important; 
     visibility: visible !important;
     pointer-events: auto; 
+    
+    /* THE VAGAL WAVE: Removed static opacity: 1 !important; 
+       This allows the keyframes below to legally drive the transparency. */
     animation: somaticBreathe 4s infinite alternate ease-in-out;
-    /* Forces S9 GPU to prioritize this layer */
+    
+    /* S9 GPU SHIELD: Pre-renders the layer for 5W efficiency */
+    will-change: opacity;
     backdrop-filter: sepia(10%) brightness(0.95); 
+    -webkit-backdrop-filter: sepia(10%) brightness(0.95); 
 }
-@keyframes somaticBreathe { 0% { opacity: 0.3; } 100% { opacity: 0.8; } }
+
+@keyframes somaticBreathe { 
+    0% { opacity: 0.15; }   /* The Exhale: Subtle gold mist */
+    100% { opacity: 0.8; }  /* The Inhale: Rich 2300K Amber */
+}
 
 /* --- KORE PORTAL OVERLAYS (Layer 3) --- */
 .fullscreen-overlay {
@@ -56,16 +71,15 @@ html, body {
     background-color: rgba(5, 5, 8, 0.7); 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    z-index: 9999 !important; /* Forced to front */
+    z-index: 9999 !important; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     transition: opacity 2.5s ease-in-out;
 }
 .hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-.brand-container { text-align: center; }
 
-/* THE MASSIVE TITLE */
+/* THE BRANDING */
 .kore-title { 
     font-family: 'Times New Roman', serif; 
     color: #E8DCC4; 
