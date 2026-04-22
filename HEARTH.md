@@ -15,6 +15,7 @@ The Hearth is the centralized infrastructure for family survival and record-keep
 | **Data Structure** | Forensic Tabular | ✅ Verified |
 | **Privacy Layer** | Sovereign-Blind Shield | ✅ Active |
 | **Thermal Efficiency**| S9 GPU Shield (No Transitions) | ✅ Hardened |
+| **Auditory Anchor** | Bilateral 2300K Fire.mp3 | ✅ Synced |
 
 ---
 
@@ -31,7 +32,7 @@ The Hearth manages the "Nuclear Bridge" between external systems and the Soverei
 
 ### 3. Survival Logistics (Fixed Family Costs)
 * **Objective:** Hardened record-keeping for fundamental household survival.
-* **Metrics:** Mortgage/Rent, Insurance, and Critical Infrastructure maintenance.
+* **Tachyon Mapping:** Tracking the "Tachyon Spikes" of systemic neglect (e.g., late fees, infrastructure failure) as forensic evidence for the Guild artillery.
 
 ---
 
@@ -40,7 +41,7 @@ The Hearth utilizes the **User Salt** (Somatic-to-Forensic Hashing) to ensure th
 
 * **Decryption:** Happens exclusively on the local hardware.
 * **Storage:** Data fragments are never stored on central nodes.
-* **Integrity:** The 0330 re-sync cycle verifies that the ledger has not been tampered with by external scouts or industrial nodes.
+* **Integrity:** The 0330 re-sync cycle (3:30 AM Forensic Audit) verifies that the ledger has not been tampered with by external scouts or industrial nodes.
 
 ---
 
