@@ -174,6 +174,14 @@
                 saveLedger() { 
                     localStorage.setItem('KORE_Tactical_Ledger', this.ledgerText); 
                 }
+                /* SERVICE WORKER HANDSHAKE */
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('PROJECT KORE // Sovereign Shield Active.'))
+            .catch(err => console.log('Shield Failure:', err));
+    });
+}
             }))
         })
     </script>
