@@ -19,11 +19,11 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* 8K CHIAROSCURO ANCHOR (85mm BLUR START) */
+        /* FIXED: ENEE-5W Compliant Blur (Max 20px) to prevent S9 stuttering */
         .bg-anchor { 
             position: fixed; width: 100%; height: 100%; 
             background: url('atrium_8k.webp') center/cover no-repeat; 
-            opacity: 0; filter: blur(30px) brightness(0.5); 
+            opacity: 0; filter: blur(20px) brightness(0.5); 
             transition: 4s cubic-bezier(0.4, 0, 0.2, 1); 
             z-index: 1;
         }
@@ -107,6 +107,15 @@
 
         // Forensic Log
         console.log("KORE // Sovereign Sync Staged. Awaiting Identity Verification.");
+
+        // FIXED: BOOT SEQUENCE SHIELD INITIALIZER
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('KORE // Shield Vaulting Commenced on Boot.'))
+                    .catch(err => console.error('Shield Initiation Failure:', err));
+            });
+        }
     </script>
 </body>
 </html>
