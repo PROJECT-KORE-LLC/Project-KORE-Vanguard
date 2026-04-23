@@ -121,12 +121,21 @@ function revealGuildCovenant() {
     }
 }
 
-function joinTheGuild(e) {
-    if (e) e.preventDefault();
-    const recipient = "architect.kore@proton.me"; 
+function joinTheGuild() {
+    // LOCK THE IDENTITY (This is the key the 6 sectors are looking for)
+    localStorage.setItem('KORE_Identity_Locked', 'true');
+
+    const recipient = "architect.kore@proton.me";
     const subject = "GUILD ADMITTANCE REQUEST";
-    const body = "The Ledger has been decrypted. I have seen the blueprint from the kitchen floor. I am ready to discuss the move against the monopoly.";
+    const body = "The Ledger has been decrypted. I have seen the blueprint from the kitchen floor.";
+    
+    // Open the email
     window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // WARP TO THE SANCTUARY (After a 2-second delay to allow the email app to open)
+    setTimeout(() => {
+        window.location.href = 'guild.html';
+    }, 2000);
 }
 
 document.addEventListener('keydown', (event) => {
