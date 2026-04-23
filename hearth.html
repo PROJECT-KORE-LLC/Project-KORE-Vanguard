@@ -16,7 +16,6 @@
     <style>
         [x-cloak] { display: none !important; }
 
-        /* --- THE ALIGNMENT ARRAY (ONE-CLICK PERSONALIZATION) --- */
         :root {
             --bg: #050505; --accent: #d4af37; --text: #e0e0e0; --glass: rgba(15, 15, 15, 0.95);
         }
@@ -36,19 +35,16 @@
             background-color: var(--bg);
             color: var(--text);
             display: flex; flex-direction: column;
-            transition: background-color 0.8s ease, color 0.8s ease;
+            transition: 0.8s;
         }
 
-        /* --- THE 6HZ SOMATIC PULSE --- */
         .pulse-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--accent);
-            opacity: 0; pointer-events: none; z-index: 999;
+            background: var(--accent); opacity: 0; pointer-events: none; z-index: 999;
             animation: somatic 0.166s infinite alternate;
         }
         @keyframes somatic { from { opacity: 0; } to { opacity: 0.02; } }
 
-        /* SEAMLESS HEADER */
         .nav-header {
             position: absolute; top: 0; left: 0; width: 100%;
             padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
@@ -71,46 +67,34 @@
         }
         .artifact-btn:hover { background: var(--accent); color: var(--bg); }
 
-        /* THE LEDGER INTERFACE */
         #interface {
             height: 100vh; display: flex; align-items: center; justify-content: center;
             padding: 40px; box-sizing: border-box;
         }
 
         .ledger-vault {
-            border: 1px solid var(--accent);
-            padding: 50px;
-            background: var(--glass);
-            width: 100%; max-width: 850px;
-            box-shadow: 0 30px 100px rgba(0,0,0,1);
-            position: relative;
+            border: 1px solid var(--accent); padding: 50px;
+            background: var(--glass); width: 100%; max-width: 850px;
+            box-shadow: 0 30px 100px rgba(0,0,0,1); position: relative;
             backdrop-filter: blur(25px);
         }
 
-        h1 { 
-            color: var(--accent); letter-spacing: 10px; text-transform: uppercase; 
-            margin: 0 0 10px 0; font-size: 2rem;
-        }
+        h1 { color: var(--accent); letter-spacing: 10px; text-transform: uppercase; margin: 0; font-size: 2rem; }
 
         .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px; margin-top: 40px;
         }
 
         .grid-item {
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 20px;
-            background: rgba(255,255,255,0.02);
-            transition: 0.3s;
+            border: 1px solid rgba(212, 175, 55, 0.2); padding: 20px;
+            background: rgba(255,255,255,0.02); transition: 0.3s;
         }
         .grid-item:hover { border-color: var(--accent); background: rgba(255,255,255,0.05); }
 
         .item-label { font-size: 0.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; opacity: 0.7; }
-        .item-value { font-size: 1.2rem; letter-spacing: 1px; color: #fff; }
+        .item-value { font-size: 1.1rem; letter-spacing: 1px; color: #fff; }
 
-        /* FORENSIC FOOTER */
         .forensic-footer { position: absolute; bottom: 10px; width: 100%; text-align: center; font-size: 0.6rem; letter-spacing: 2px; opacity: 0.3; pointer-events: none; }
     </style>
 </head>
@@ -120,7 +104,6 @@
 
     <nav class="nav-header">
         <a href="guild.html" class="back-link">◂ THE GUILD HALL</a>
-        
         <div style="display:flex; gap:15px; align-items:center;">
             <button class="artifact-btn" onclick="toggleAlignment()">✨ ALIGNMENT</button>
             <button class="artifact-btn" onclick="window.location.href='resonance.html'">RESONANCE</button>
@@ -130,29 +113,29 @@
     <main id="interface">
         <section class="ledger-vault">
             <h1>🔥 THE HEARTH</h1>
-            <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6;">[ RESOURCE LOGISTICS // GRID STABILITY // 0826-AUDIT ]</p>
+            <p style="font-size: 0.7rem; letter-spacing: 3px; opacity: 0.6; margin-top: 10px;">[ RESOURCE LOGISTICS // UTILITY HUB // 0826-AUDIT ]</p>
             
             <div class="grid-container">
                 <div class="grid-item">
-                    <div class="item-label">Operational Status</div>
-                    <div class="item-value">ENEE COMPLIANT</div>
+                    <div class="item-label">Grid Status</div>
+                    <div class="item-value">OPERATIONAL</div>
                 </div>
                 <div class="grid-item">
-                    <div class="item-label">Power Draw</div>
-                    <div class="item-value">4.82W / 5.0W</div>
+                    <div class="item-label">Supply Chain</div>
+                    <div class="item-value">VERIFIED</div>
                 </div>
                 <div class="grid-item">
-                    <div class="item-label">Active Signatures</div>
-                    <div class="item-value">711 VERIFIED</div>
+                    <div class="item-label">Asset Liquidity</div>
+                    <div class="item-value">STABLE</div>
                 </div>
                 <div class="grid-item">
-                    <div class="item-label">Sector Safety</div>
-                    <div class="item-value">HARDENED</div>
+                    <div class="item-label">Inbound Traffic</div>
+                    <div class="item-value">SECURE</div>
                 </div>
             </div>
 
-            <div style="margin-top: 40px; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 30px;">
-                <button class="artifact-btn" style="width: 100%;">SYNC LOGISTICS LEDGER</button>
+            <div style="margin-top: 40px; border-top: 1px solid rgba(212, 175, 55, 0.1); padding-top: 30px;">
+                <button class="artifact-btn" style="width: 100%;">ACCESS FULL LOGISTICS LEDGER</button>
             </div>
         </section>
     </main>
@@ -162,7 +145,6 @@
     </div>
 
     <script>
-        /* THE ALIGNMENT KERNEL */
         const palettes = ['NOIR', 'LUNAR', 'VELLUM', 'AMETHYST'];
         function toggleAlignment() {
             let current = localStorage.getItem('KORE_Palette') || 'NOIR';
@@ -176,9 +158,7 @@
 
         document.addEventListener('alpine:init', () => {
             Alpine.data('hearthApp', () => ({
-                init() {
-                    console.log("Hearth Logistics Synchronized.");
-                }
+                init() { console.log("Universal Logistics Hub Synced."); }
             }))
         })
     </script>
