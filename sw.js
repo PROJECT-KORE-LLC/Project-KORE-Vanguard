@@ -1,4 +1,4 @@
-const CACHE_NAME = 'KORE_Sovereign_Shield_v2';
+const CACHE_NAME = 'KORE_Sovereign_Shield_v4';
 
 const ASSETS = [
     // --- CORE MAINframe ---
@@ -10,6 +10,7 @@ const ASSETS = [
     'archive.html',
     'hearth.html',
     'gallery.html',
+    'resonance.html',
     'manifest.json',
     'audio-engine.js',
     'kore-logo.png',
@@ -18,7 +19,9 @@ const ASSETS = [
     'atrium_8k.webp',
     'command_8k.webp',
     'logistics_8k.webp',
-    'gallery_8k.webp',
+    'archive_8k.webp',
+    'vault_8k.webp',
+    'resonance_8k.webp',
 
     // --- THE RESONANCE ARRAY (Audio) ---
     'waves.mp3',
@@ -49,7 +52,7 @@ const ASSETS = [
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            console.log('KORE // Shielding the Resonance Array...');
+            console.log('KORE // Shielding the complete 6-Sector Array...');
             return cache.addAll(ASSETS);
         })
     );
