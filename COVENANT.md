@@ -55,7 +55,6 @@ The Covenant manages the tactical flow of family activities within the Tank to e
 **Tactical Directives:**
 * **Family Activity Coordination:** Managing the shared "To-Do" lists and engagement schedules to maintain the Guild’s momentum.
 * **The 0330 Re-Sync:** A daily audit of the Tank’s activity logs to purge "Static" and verify that all directives are cleared.
-* **Industrial Handshake:** Documenting the **TMNA-Cluster** audit as proof that even our organizational logic is of industrial interest.
 
 ---
 
