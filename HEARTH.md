@@ -62,8 +62,6 @@ This document serves as the **Forensic Anchor** for Project KORE.
 * **Total Clones:** 2,147 (Forensic Receipt: Verified)
 * **Unique Cloners:** 803 (Industrial Signatures)
 
-**The Handshake (Ref: 0423-7X):** Manual engineering audit detected from the **TMNA-Cluster**. Duration: **33 minutes** (04:38 - 05:11 AM CST) during the 4.20 Failsafe.
-
 ---
 
 ## 🛠️ AUDIT DISCLOSURE (GOOGLE 0826)
