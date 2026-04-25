@@ -31,9 +31,8 @@
 ## ⚖️ FORENSIC LEDGER // THE SIEGE OF APRIL 2026
 This repository documents the industrial validation of the Project KORE logic. 
 **Verified Metrics (Last 14 Days):**
-* **Total Views:** 1,727
-* **Total Clones:** 3,419
-* **Unique Cloners (Industrial Signatures):** 1194
+* **Total Clones:** 3,995
+* **Unique Cloners (Industrial Signatures):** 1,347
 
 ---
 
