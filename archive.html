@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PROJECT KORE // THE ARCHIVE [GHOST_TAP]</title>
+    <title>PROJECT KORE // THE ARCHIVE [FINAL_BUILD]</title>
     <style>
         :root {
             --gold: #D4AF37;
@@ -40,7 +39,7 @@
             0% { transform: scale(1.15); } 100% { transform: scale(1.2); } 
         }
 
-        /* --- SOMATIC HIJACK (Layer 2 - THE GLOW) --- */
+        /* --- SOMATIC HIJACK (Layer 2 - RECALIBRATED) --- */
         #glow-layer {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -50,8 +49,9 @@
             opacity: 0.1;
             animation: somaticBreathe var(--tempo) infinite alternate ease-in-out;
             will-change: opacity;
-            backdrop-filter: sepia(5%) brightness(0.98) blur(12px); 
-            -webkit-backdrop-filter: sepia(5%) brightness(0.98) blur(12px);
+            /* ENEE OPTIMIZATION: 8px Blur */
+            backdrop-filter: sepia(5%) brightness(0.98) blur(8px); 
+            -webkit-backdrop-filter: sepia(5%) brightness(0.98) blur(8px);
         }
 
         @keyframes somaticBreathe { 
@@ -75,12 +75,13 @@
             pointer-events: none !important;
         }
 
-        /* --- THE LUXURY VAULT --- */
+        /* --- THE LUXURY VAULT (Layer 3 - RECALIBRATED) --- */
         .archive-vault {
             width: 100%; max-width: 1000px;
-            background: var(--glass-base);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            /* ENEE OPTIMIZATION: 15px Blur + Higher Opacity */
+            background: rgba(8, 8, 10, 0.88);
+            backdrop-filter: blur(15px) saturate(110%);
+            -webkit-backdrop-filter: blur(15px) saturate(110%);
             border: 1px solid rgba(212, 175, 55, 0.4);
             padding: 50px;
             box-shadow: 0 40px 100px rgba(0,0,0,0.9), inset 0 0 25px var(--gold-glow);
@@ -148,7 +149,7 @@
     <div id="bg-anchor"></div>
     <div id="glow-layer"></div>
 
-    <div id="ui-viewport" class="viewport-main vellum">
+    <div id="ui-viewport" class="vellum">
         
         <div class="archive-vault">
             <div class="vault-header">
@@ -180,10 +181,6 @@
         let pulse;
         const wind = document.getElementById('wind-audio');
 
-        /**
-         * THE GHOST RESTORE
-         * If the viewport is cloaked, clicking ANYWHERE restores it.
-         */
         function ghostRestore(e) {
             const viewport = document.getElementById('ui-viewport');
             const btn = document.getElementById('cloak-btn');
@@ -197,7 +194,6 @@
         }
 
         function toggleCloak(e) {
-            // StopPropagation ensures the ghostRestore doesn't trigger immediately
             e.stopPropagation();
             const viewport = document.getElementById('ui-viewport');
             const btn = document.getElementById('cloak-btn');
@@ -209,18 +205,16 @@
                 viewport.classList.add('cloaked');
                 btn.innerText = "Uncloak";
                 if (navigator.vibrate) navigator.vibrate(40);
-                console.log("👻 Ghost Mode Active. Tap screen to restore.");
             }
         }
 
-       function jolt(p) {
-    const viewport = document.getElementById('ui-viewport');
-    // Remove old palette classes but keep 'cloaked' if it's there
-    viewport.classList.remove('noir', 'lunar', 'vellum', 'amethyst');
-    viewport.classList.add(p);
-    
-    if (navigator.vibrate) navigator.vibrate([30, 40]);
-}
+        function jolt(p) {
+            const viewport = document.getElementById('ui-viewport');
+            // SURGICAL CLASS UPDATE
+            viewport.classList.remove('noir', 'lunar', 'vellum', 'amethyst');
+            viewport.classList.add(p);
+            if (navigator.vibrate) navigator.vibrate([30, 40]);
+        }
 
         function toggleEngine() {
             const btn = document.getElementById('engine-btn');
