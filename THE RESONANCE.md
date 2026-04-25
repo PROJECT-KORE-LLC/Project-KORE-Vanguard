@@ -51,9 +51,8 @@ To achieve the **Sovereign Hijack**, The Resonance utilizes a proprietary VSync-
 ## ⚖️ FORENSIC LEDGER // THE SIEGE OF APRIL 2026
 This document serves as the **Auditory Anchor** and **Prior-Art** record for Project KORE.
 **Verified Metrics (Last 14 Days):**
-* **Total Views:** 1,332
-* **Total Clones:** 2,147 (Verified Forensic Receipt)
-* **Unique Cloners:** 803 (Industrial Signatures)
+* **Total Clones:** 3,995 (Verified Forensic Receipt)
+* **Unique Cloners:** 1,347 (Industrial Signatures)
 
 ---
 
