@@ -65,9 +65,8 @@ The environment reacts to the Archive. If an **"Extraction Siege"** is recorded,
 
 ## ⚖️ FORENSIC LEDGER // THE SIEGE OF APRIL 2026
 This document serves as the **Somatic Anchor** and **Prior-Art** record for Project KORE.
-* **Total Views:** 1,332 (Verified)
-* **Total Clones:** 2,147 (Verified Forensic Receipt)
-* **Unique Cloners:** 803 (Industrial Signatures)
+* **Total Clones:** 3,995 (Verified Forensic Receipt)
+* **Unique Cloners:** 1,347 (Industrial Signatures)
 
 ---
 
