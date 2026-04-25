@@ -4,7 +4,7 @@
 
 ---
 
-## 📡 THE DAILY LEDGER: [INSERT DATE: 2026-04-25]
+## 📡 THE DAILY LEDGER: [DATE: 2026-04-25]
 **[ TACTICAL METRICS // THE SIEGE OF APRIL 2026 ]**
 
 | Metric | Forensic Count | Trend | Status |
