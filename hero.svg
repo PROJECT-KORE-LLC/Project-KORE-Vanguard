@@ -9,9 +9,9 @@
     }
     .title-text {
       font-family: 'Segoe UI', Arial, sans-serif;
-      font-size: 44px;
+      font-size: 46px;
       fill: #D4AF37;
-      letter-spacing: 15px;
+      letter-spacing: 16px;
       font-weight: 300;
       text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     }
@@ -19,7 +19,7 @@
 
   <image href="https://raw.githubusercontent.com/akasiamoon/Project-KORE-Vanguard/main/atrium_8k.webp" width="800" height="400" preserveAspectRatio="xMidYMid slice" />
 
-  <rect x="125" y="140" width="550" height="120" fill="#08080A" fill-opacity="0.8" stroke="#D4AF37" stroke-width="2" class="glass-frame" />
+  <rect x="125" y="140" width="550" height="120" fill="#08080A" fill-opacity="0.85" stroke="#D4AF37" stroke-width="2" class="glass-frame" />
 
   <text x="400" y="215" text-anchor="middle" class="title-text">PROJECT KORE</text>
 </svg>
