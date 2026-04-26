@@ -1,4 +1,21 @@
+<div align="center">
 
+# 🏛️ PROJECT KORE
+
+![Project KORE Portal](hero.svg)
+
+---
+
+**"Join the Guild or remain in the static."**
+
+</div>
+
+## 🛰️ THE MISSION
+Project KORE is a Digital Public Utility providing a High-Fidelity Sanctuary for the **Abandoned 90%**.
+
+$$\text{ENEE Standard} \approx \frac{\text{Visual Fidelity (8K)}}{\text{Thermal Load (5.0W)}} \times \text{Somatic VSync}$$
+
+---
 
 
 # 🌒 PROJECT KORE
