@@ -1,3 +1,17 @@
+<div align="center">
+
+# 🏛️ PROJECT KORE
+<img src="hero.svg" width="100%" alt="Project KORE Home Anchor" />
+
+**"Join the Guild or remain in the static."**
+
+---
+
+[ ⚖️ THE CHRONICLE ](FORGE_CHRONICLE.md) | [ 🛡️ THE VAULT ](VAULT.md) | [ 📊 THE LEDGER ](LEDGER.md)
+
+</div>
+
+
 # 🌒 PROJECT KORE
 ### **[ SOVEREIGN SOMATIC KERNEL & RESEARCH LEDGER ]**
 ### **[ THE ARCHITECT ]**
