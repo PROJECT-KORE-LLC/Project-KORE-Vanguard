@@ -2,8 +2,6 @@
   <img src="hero.svg" width="100%" alt="PROJECT KORE - THE SOVEREIGN SPINE" />
 </div>
 
-# 🏛️ THE FORGE CHRONICLE: MASTER BRIDGE
-### **[ PROJECT KORE ]**
 ### **[ STATUS: HARDENED // 418 TEAPOT ]**
 
 ---
