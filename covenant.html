@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PROJECT KORE // COVENANT COMMAND // TEST SHELL 2 // LIQUID 9.0</title>
+    <title>PROJECT KORE // COVENANT COMMAND // HARDENED 9.4</title>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        /* --- THE BORDER-BOX GAVEL (TOTAL CONTAINMENT) --- */
         *, *::before, *::after { box-sizing: border-box; }
 
         :root {
@@ -27,13 +26,13 @@
 
         body, html {
             margin: 0; padding: 0; background: #000;
-            overflow-x: hidden; /* HARD STOP ON SIDE-SCROLLING */
+            overflow-x: hidden;
             font-family: 'Times New Roman', serif;
             height: 100%; width: 100%; color: #F4EBD0;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- THE HEARTH --- */
+        /* --- THE HEARTH & SOMATIC PULSE --- */
         #bg-anchor {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #020204 url('logistics_8k.webp') no-repeat center center;
@@ -42,7 +41,6 @@
             will-change: transform; transform: translateZ(0);
             pointer-events: none;
         }
-        @keyframes flatlineBreath { 0% { transform: scale(1.1) translateZ(0); } 100% { transform: scale(1.16) translateZ(0); } }
 
         #glow-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -52,7 +50,10 @@
             will-change: opacity; opacity: 0.15;
         }
 
-        /* --- THE SOMATIC GATE (AUDITOR VERBIAGE GROUND TRUTH) --- */
+        @keyframes flatlineBreath { 0% { transform: scale(1.1) translateZ(0); } 100% { transform: scale(1.16) translateZ(0); } }
+        @keyframes flatlineGlow { 0% { opacity: 0.15; } 100% { opacity: 0.75; } }
+
+        /* --- THE SOMATIC GATE --- */
         #handshake-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 2000;
@@ -76,7 +77,7 @@
             text-align: center;
         }
 
-        /* --- COMMAND VIEWPORT (FIT-TO-SCREEN PROTOCOL) --- */
+        /* --- COMMAND VIEWPORT --- */
         #ui-viewport {
             position: relative; z-index: 100;
             height: 100vh; width: 100vw;
@@ -84,84 +85,51 @@
             padding: 10px;
         }
         #ui-viewport.active { display: flex; opacity: 1; }
+        #ui-viewport.cloaked { display: none !important; pointer-events: none !important; }
 
         .command-tank {
             width: 100%; max-width: 1400px; height: 96vh;
-            background: var(--glass); border: 1px solid var(--primary);
+            background: var(--glass); border: 2px solid var(--primary);
             padding: 15px; display: flex; flex-direction: column; gap: 10px;
             box-shadow: 0 0 100px #000, inset 0 0 20px var(--primary-glow);
-            backdrop-filter: blur(15px); overflow: hidden;
-            contain: strict;
+            backdrop-filter: blur(15px); overflow: hidden; contain: strict;
         }
 
-        /* --- HEADER ALIGNMENT --- */
         .tank-header { border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
         .matrix-nav { display: flex; align-items: center; gap: 10px; }
         .matrix-nav h2 { margin: 0; letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem; color: var(--primary); }
         .nav-arrow { background: none; border: 1px solid var(--primary); color: var(--primary); cursor: pointer; padding: 4px 10px; font-size: 0.7rem; }
 
-        /* --- THE CORE GRID (LAPTOP 3-COLUMN / S9 1-COLUMN) --- */
-        .core-grid { 
-            display: grid; 
-            grid-template-columns: minmax(0, 310px) 1fr minmax(0, 310px); 
-            gap: 15px; flex: 1; min-height: 0; width: 100%;
-        }
-
+        .core-grid { display: grid; grid-template-columns: minmax(0, 310px) 1fr minmax(0, 310px); gap: 15px; flex: 1; min-height: 0; width: 100%; }
         .array-column { display: flex; flex-direction: column; gap: 15px; min-height: 0; }
 
-        /* --- SECTOR ALIGNMENT (THE SQUISH DEFENSE) --- */
-        .sector { 
-            border: 1px solid rgba(212, 175, 55, 0.2); padding: 12px; 
-            display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.01); 
-            min-height: 0; flex: 1; overflow: hidden;
-        }
-        .sector h3 { 
-            margin: 0 0 8px 0; 
-            font-size: 0.6rem; 
-            letter-spacing: 3px; 
-            text-transform: uppercase; color: var(--primary); 
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1); 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
+        .sector { border: 1px solid rgba(212, 175, 55, 0.2); padding: 12px; display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.01); min-height: 0; flex: 1; overflow: hidden; }
+        .sector h3 { margin: 0 0 8px 0; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); border-bottom: 1px solid rgba(212, 175, 55, 0.1); white-space: nowrap; }
 
         .feed-box { flex: 1; overflow-y: auto; scrollbar-width: none; min-height: 0; }
-        .entry { 
-            margin-bottom: 8px; font-size: 0.8rem; border-left: 2px solid var(--primary); 
-            padding-left: 10px; line-height: 1.4; color: rgba(244, 235, 208, 0.9);
-            word-wrap: break-word; /* PREVENTS TEXT FROM PUSHING BOX WIDTH */
-        }
+        .entry { margin-bottom: 8px; font-size: 0.8rem; border-left: 2px solid var(--primary); padding-left: 10px; line-height: 1.4; color: rgba(244, 235, 208, 0.9); word-wrap: break-word; }
 
-        /* --- THE CALENDAR GAVEL --- */
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; flex: 1; width: 100%; }
-        .cal-day {
-            background: rgba(255,255,255,0.01); border: 1px solid rgba(212, 175, 55, 0.05);
-            display: flex; justify-content: center; align-items: center;
-            font-size: 0.6rem; color: rgba(212, 175, 55, 0.3); cursor: pointer; position: relative; min-height: 30px;
-        }
+        .cal-day { background: rgba(255,255,255,0.01); border: 1px solid rgba(212, 175, 55, 0.05); display: flex; justify-content: center; align-items: center; font-size: 0.6rem; color: rgba(212, 175, 55, 0.3); cursor: pointer; position: relative; min-height: 30px; }
         .cal-day.active-node { border-color: var(--primary); background: rgba(212, 175, 55, 0.1); color: #fff; }
-        .cal-day.today { border-color: #fff; color: #fff; }
 
-        /* --- FOOTER & DISPATCH --- */
         .tank-footer { border-top: 1px solid rgba(212, 175, 55, 0.3); padding-top: 10px; display: flex; flex-direction: column; gap: 10px; }
         .dispatch-cluster { display: flex; gap: 10px; align-items: stretch; width: 100%; }
         .target-selector { display: flex; flex-direction: column; gap: 4px; width: 100px; flex-shrink: 0; }
         .target-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(212, 175, 55, 0.2); color: var(--primary); font-size: 0.45rem; padding: 4px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
         .target-btn.active { border-color: var(--primary); background: var(--primary-glow); }
-        .command-input { flex: 1; background: rgba(0,0,0,0.2); border: none; border-left: 2px solid var(--primary); color: var(--primary); padding: 8px; font-family: monospace; outline: none; resize: none; font-size: 0.85rem; min-width: 0; }
-        .exec-btn { width: 70px; background: #000; border: 1px solid #fff; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.6rem; cursor: pointer; flex-shrink: 0; }
+        .command-input { flex: 1; background: rgba(0,0,0,0.2); border: none; border-left: 2px solid var(--primary); color: var(--primary); padding: 8px; font-family: monospace; outline: none; resize: none; font-size: 0.85rem; }
+        .exec-btn { width: 70px; background: #000; border: 1px solid #fff; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 0.6rem; cursor: pointer; }
 
-        /* --- THE LIQUID JOLT BAR --- */
         .jolt-bar { display: flex; gap: 5px; justify-content: center; width: 100%; }
         .lux-btn { background: rgba(0,0,0,0.6); border: 1px solid var(--primary); color: var(--primary); padding: 8px 12px; cursor: pointer; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; flex: 1; max-width: 100px; text-align: center; }
 
-        /* --- MOBILE SOVEREIGN COLLAPSE (S9 STRIKE) --- */
         @media (max-width: 1000px) {
             .core-grid { grid-template-columns: 1fr; overflow-y: auto; scrollbar-width: none; }
-            .array-column { width: 100%; }
             .sector { min-height: 200px; }
             .dispatch-cluster { flex-direction: row; flex-wrap: wrap; }
             .target-selector { width: 100%; flex-direction: row; }
-            .target-btn { flex: 1; font-size: 0.5rem; }
+            .target-btn { flex: 1; }
             .command-input { width: 100%; margin: 5px 0; }
             .exec-btn { width: 100%; padding: 12px; }
             .jolt-bar { flex-wrap: wrap; }
@@ -169,14 +137,14 @@
         }
     </style>
 </head>
-<body id="master-body">
+<body id="master-body" onclick="ghostRestore()">
 
     <audio id="cricket-atmosphere" src="crickets.mp3" loop></audio>
 
     <div id="handshake-overlay">
         <div class="gate-label">Initialize Sovereign Handshake</div>
         <div class="handshake-input-wrap">
-            <input type="text" id="passphrase-input" maxlength="6" autofocus autocomplete="off" spellcheck="false">
+            <input type="text" id="passphrase-input" maxlength="6" autofocus autocomplete="off" spellcheck="false" placeholder="******">
         </div>
         <div style="margin-top:40px; font-size:0.5rem; opacity:0.3; letter-spacing:4px;">PROMPT: A1B2C3</div>
     </div>
@@ -192,7 +160,7 @@
                     <h2 id="matrix-month">Matrix</h2>
                     <button class="nav-arrow" onclick="changeMonth(1)">></button>
                 </div>
-                <button onclick="toggleCloak()" style="background:none; border:1px solid var(--primary); color:var(--primary); font-size:0.5rem; padding:4px 10px; cursor:pointer;">CLOAK</button>
+                <button onclick="toggleCloak(event)" style="background:none; border:1px solid var(--primary); color:var(--primary); font-size:0.5rem; padding:4px 10px; cursor:pointer;">CLOAK</button>
             </header>
 
             <div class="core-grid">
@@ -229,18 +197,18 @@
     </div>
 
     <script>
-        const SUPABASE_URL = 'https://oqwljgnlhaghnrtkvvkz.supabase.co'; 
-        const SUPABASE_KEY = 'oqwljgnlhaghnrtkvvkz';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // --- 1. DIRECT HANDSHAKE (PRIORITY 1) ---
         const TEST_KEY = "A1B2C3";
-        let currentTarget = "TASK", activeDate = null, matrixState = {}, viewDate = new Date();
-
         const gateInput = document.getElementById('passphrase-input');
+
         function tryUnlock(value) {
             if (value.trim().toUpperCase() === TEST_KEY) {
+                // BRUTE FORCE REVEAL
                 document.getElementById('handshake-overlay').style.display = 'none';
                 document.getElementById('ui-viewport').style.display = 'flex';
                 document.getElementById('ui-viewport').classList.add('active');
+                
+                // LAZY LOAD DATA
                 inhaleVeil();
                 try { document.getElementById('cricket-atmosphere').play(); } catch(e){}
             }
@@ -248,7 +216,21 @@
         gateInput.addEventListener('input', (e) => tryUnlock(e.target.value));
         gateInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(gateInput.value); });
 
-        function toggleCloak() { document.getElementById('ui-viewport').classList.toggle('cloaked'); }
+        // --- 2. DB SHIELD ---
+        let supabaseClient = null;
+        try {
+            const SUPABASE_URL = 'https://oqwljgnlhaghnrtkvvkz.supabase.co'; 
+            const SUPABASE_KEY = 'oqwljgnlhaghnrtkvvkz';
+            if (typeof supabase !== 'undefined') {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            }
+        } catch (e) { console.warn("Supabase Shielded."); }
+
+        // --- 3. SYSTEM LOGIC ---
+        let currentTarget = "TASK", activeDate = null, matrixState = {}, viewDate = new Date();
+
+        function toggleCloak(e) { if(e) e.stopPropagation(); document.getElementById('ui-viewport').classList.add('cloaked'); }
+        function ghostRestore() { const ui = document.getElementById('ui-viewport'); if (ui.classList.contains('cloaked')) { ui.classList.remove('cloaked'); } }
         function jolt(p) { const b = document.getElementById('master-body'); b.className = ''; b.classList.add(`${p}-mode`); }
         function setTarget(t, btn) { currentTarget = t; document.querySelectorAll('.target-btn').forEach(x => x.classList.remove('active')); btn.classList.add('active'); }
 
@@ -256,21 +238,23 @@
             const raw = localStorage.getItem('KORE_V1');
             if (raw) { try { matrixState = JSON.parse(atob(raw)); } catch(e) { matrixState = {}; } }
             initMatrix();
-            const { data, error } = await supabaseClient.from('matrix_ledger').select('*');
-            if (!error && data) {
-                data.forEach(row => {
-                    const d = row.node_date;
-                    if (!matrixState[d]) matrixState[d] = { TASK:[], APPT:[], IMPORTANT:[], NOTE:[] };
-                    if (!matrixState[d][row.category].includes(row.content)) matrixState[d][row.category].push(row.content);
-                });
-                initMatrix();
+            if (supabaseClient) {
+                const { data, error } = await supabaseClient.from('matrix_ledger').select('*');
+                if (!error && data) {
+                    data.forEach(row => {
+                        const d = row.node_date;
+                        if (!matrixState[d]) matrixState[d] = { TASK:[], APPT:[], IMPORTANT:[], NOTE:[] };
+                        if (!matrixState[d][row.category].includes(row.content)) matrixState[d][row.category].push(row.content);
+                    });
+                    initMatrix();
+                }
             }
         }
 
         function initMatrix() {
             const grid = document.getElementById('calendar-matrix');
             const y = viewDate.getFullYear(), m = viewDate.getMonth();
-            document.getElementById('matrix-month').innerText = `${viewDate.toLocaleString('default', {month:'short'})} ${y}`;
+            document.getElementById('matrix-month').innerText = `${viewDate.toLocaleString('default', {month:'long'})} ${y}`;
             grid.innerHTML = '';
             const total = new Date(y, m+1, 0).getDate();
             for(let i=1; i<=total; i++) {
@@ -303,7 +287,7 @@
             matrixState[activeDate][currentTarget].push(val);
             localStorage.setItem('KORE_V1', btoa(JSON.stringify(matrixState)));
             input.value = ''; refresh(); initMatrix();
-            await supabaseClient.from('matrix_ledger').insert([{ node_date: activeDate, category: currentTarget, content: val }]);
+            if(supabaseClient) await supabaseClient.from('matrix_ledger').insert([{ node_date: activeDate, category: currentTarget, content: val }]);
         }
 
         function changeMonth(n) { viewDate.setMonth(viewDate.getMonth() + n); initMatrix(); }
