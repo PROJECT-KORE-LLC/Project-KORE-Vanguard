@@ -117,7 +117,6 @@ This chronicle is the **Precedent**. It proves that **Agentic AI** can be safely
 
 ---
 
-## 📜 VII. LICENSE: GNU GENERAL PUBLIC LICENSE V3
 Project KORE LLC is a **Digital Public Utility**. 
 * **Hero of the Story:** The Mission.
 * **Architecture:** Sovereign-Blind / Hardened.
